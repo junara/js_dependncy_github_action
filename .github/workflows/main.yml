@@ -1,0 +1,17 @@
+name: js_dependency analysis
+on:
+  workflow_dispatch:
+
+jobs:
+  js_dependency:
+    name: Export Mermaid by js_dependency
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print a greeting
+        env:
+          MY_VAR: Hi there! My name is
+          FIRST_NAME: Mona
+          MIDDLE_NAME: The
+          LAST_NAME: Octocat
+        run: |
+          echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
