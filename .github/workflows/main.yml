@@ -15,23 +15,23 @@ jobs:
         with:
           ruby-version: '3.1' # Not needed with a .ruby-version file
       - run: gem install js_dependency
-      - run: js_dependency orphan -s src
-      - run: gh --version
-      - run: gh pr list
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - run: js_dependency orphan -s src
+#      - run: gh --version
+#      - run: gh pr list
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create comments
         run: |
           cat << EOF > comments
-          1st
+          ### orphaned dependencies
           `js_dependency orphan -s src`
-          3rd
-          <!-- js_dependency${{ github.ref }} -->
+          ${{ github.sha }}
+          <!-- js_dependency_pull_request_comments_${{ github.ref }} -->
           EOF
-      - run: gh pr comment -F ./comments "${URL}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          URL: ${{ github.event.pull_request.html_url }}
+#      - run: gh pr comment -F ./comments "${URL}"
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          URL: ${{ github.event.pull_request.html_url }}
       - name: Edit PR comment
         uses: thollander/actions-comment-pull-request@v1
         env:
@@ -53,5 +53,5 @@ jobs:
           URL: ${{ github.event.pull_request.html_url }}
         with:
           message: ${{ steps.get-comment-body.outputs.body }}
-          comment_includes: "<!-- js_dependency${{ github.ref }} -->"
+          comment_includes: "<!-- js_dependency_pull_request_comments_${{ github.ref }} -->"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
