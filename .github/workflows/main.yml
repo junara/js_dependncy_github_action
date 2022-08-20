@@ -22,6 +22,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create comments
         run: |
+          VAR2=`js_dependency orphan -s src`
+          echo "VAR3=${VAR2}" >> $GITHUB_ENV
           cat << EOF > comments
           1st
           ${{ github.event.pull_request.html_url }}
@@ -47,5 +49,5 @@ jobs:
         env:
           URL: ${{ github.event.pull_request.html_url }}
         with:
-          message: ${{ github.event.pull_request.html_url }}
+          message: ${{ env.VAR3 }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
