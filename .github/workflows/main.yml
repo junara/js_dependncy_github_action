@@ -27,9 +27,6 @@ jobs:
           `js_dependency orphan -s src`
           3rd
           EOF
-#      - name: output orphaned dependencies
-#        run: |
-#          js_dependency orphan -s src >  comments
       - run: gh pr comment -F ./comments "${URL}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,10 +39,17 @@ jobs:
           message: 'Content loaded ! (edited)Loading'
           comment_includes: 'Loading'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - id: get-comment-body
+        run: |
+          body="$(cat comments)"
+          body="${body//'%'/'%25'}"
+          body="${body//$'\n'/'%0A'}"
+          body="${body//$'\r'/'%0D'}" 
+          echo "::set-output name=body::$body"
       - name: Edit PR comment
         uses: thollander/actions-comment-pull-request@v1
         env:
           URL: ${{ github.event.pull_request.html_url }}
         with:
-          message: ${{ env.VAR3 }}
+          message: ${{ steps.get-comment-body.outputs.body }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
