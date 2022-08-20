@@ -29,9 +29,9 @@ jobs:
           `js_dependency orphan -s src`
           
           ### Targeted dependencies
-          \\\`\\\`\\\`mermaid
+          \`\`\`mermaid
           `js_dependency -s src -t src/pages/app.js -a @:./pages -c 3 -p 3`
-          \\\`\\\`\\\`
+          \`\`\`
           
           ### Analyzed commit
           ${{ github.sha }}
