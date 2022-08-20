@@ -27,6 +27,9 @@ jobs:
           2nd
           3rd
           EOF
+      - name: output orphaned dependencies
+        run: |
+          js_dependency orphan -s src >  comments
       - run: gh pr comment -F ./comments "${URL}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
