@@ -26,7 +26,7 @@ jobs:
           1st
           `js_dependency orphan -s src`
           3rd
-          <!-- ${{ github.ref }} -->
+          <!-- js_dependency${{ github.ref }} -->
           EOF
       - run: gh pr comment -F ./comments "${URL}"
         env:
@@ -53,5 +53,5 @@ jobs:
           URL: ${{ github.event.pull_request.html_url }}
         with:
           message: ${{ steps.get-comment-body.outputs.body }}
-          comment_includes: "<!-- ${{ github.ref }} -->"
+          comment_includes: "<!-- js_dependency${{ github.ref }} -->"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
