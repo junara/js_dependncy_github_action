@@ -1,6 +1,7 @@
 name: js_dependency analysis
 on:
   workflow_dispatch:
+  pull_request:
 
 jobs:
   js_dependency:
