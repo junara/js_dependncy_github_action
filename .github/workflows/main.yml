@@ -7,6 +7,8 @@ jobs:
   js_dependency:
     name: Export Mermaid by js_dependency
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@359bebbc29cbe6c87da6bc9ea3bc930432750108
@@ -14,3 +16,7 @@ jobs:
           ruby-version: '3.1' # Not needed with a .ruby-version file
       - run: gem install js_dependency
       - run: js_dependency orphan -s src
+      - run: gh --version
+      - run: gh pr list
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
