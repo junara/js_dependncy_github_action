@@ -1,2 +1,2 @@
 import New from '../components/New';
-console.log('test2')
+console.log('test3')
