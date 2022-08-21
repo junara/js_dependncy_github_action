@@ -15,7 +15,7 @@ jobs:
         with:
           ruby-version: '3.1'
       - run: gem install js_dependency
-      - name: Create comments
+      - name: Create report
         env:
           SRC_PATH: src
           TARGET_PATHS: "src/components/sub/Title.vue src/pages/app.js"
