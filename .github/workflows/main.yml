@@ -18,20 +18,10 @@ jobs:
       - name: Create comments
         run: |
           cat << EOF > comments
-          ## JsDependency Report
-
-          ### Orphaned dependencies
-          `js_dependency orphan -s src`
-          
-          ### Targeted dependencies
-          \`\`\`mermaid
-          `js_dependency -s src -t src/pages/app.js -a @:./pages -c 3 -p 3`
-          \`\`\`
+          `js_dependency export_markdown_report -s src -t src/pages/app.js -a @:./pages -c 3 -p 3 --identifier js_dependency_pull_request_comments_${{ github.ref }}`
           
           ### Analyzed commit
           ${{ github.sha }}
-
-          <!-- js_dependency_pull_request_comments_${{ github.ref }} -->
           EOF
       - id: get-comment-body
         run: |
