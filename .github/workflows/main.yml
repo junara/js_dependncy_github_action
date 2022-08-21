@@ -19,9 +19,15 @@ jobs:
         env:
           SRC_PATH: src
           TARGET_PATHS: "src/components/sub/Title.vue src/pages/app.js"
+          CHILD_ANALYZE_LEVEL: 1
+          PARENT_ANALYZE_LEVEL: 1
+          NAME_LEVEL: 2
+          ALIAS_PATHS: "@:./pages"
+          IDENTIFIER: js_dependency_pull_request_comments_${{ github.ref }}
+          EXCLUDE_OUTPUT_NAMES: "pages"
         run: |
           cat << EOF > ${{ github.sha }}_comment
-          `js_dependency export_markdown_report -s ${SRC_PATH} -t ${TARGET_PATHS} -a @:./pages -c 3 -p 3 --identifier js_dependency_pull_request_comments_${{ github.ref }}`
+          `js_dependency export_markdown_report -s ${SRC_PATH} -t ${TARGET_PATHS} -a @:./pages -c ${CHILD_ANALYZE_LEVEL} -p ${PARENT_ANALYZE_LEVEL} --identifier ${IDENTIFIER}`
           
           ### Analyzed commit
           ${{ github.sha }}
