@@ -16,9 +16,12 @@ jobs:
           ruby-version: '3.1'
       - run: gem install js_dependency
       - name: Create comments
+        env:
+          SRC_PATH: src
+          TARGET_PATHS: src/pages/app.js
         run: |
           cat << EOF > ${{ github.sha }}_comment
-          `js_dependency export_markdown_report -s src -t src/pages/app.js -a @:./pages -c 3 -p 3 --identifier js_dependency_pull_request_comments_${{ github.ref }}`
+          `js_dependency export_markdown_report -s ${SRC_PATH} -t ${TARGET_PATHS} -a @:./pages -c 3 -p 3 --identifier js_dependency_pull_request_comments_${{ github.ref }}`
           
           ### Analyzed commit
           ${{ github.sha }}
