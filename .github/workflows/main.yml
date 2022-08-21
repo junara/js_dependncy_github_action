@@ -27,7 +27,7 @@ jobs:
           EXCLUDE_OUTPUT_NAMES: "pages"
         run: |
           cat << EOF > ${{ github.sha }}_comment
-          `js_dependency export_markdown_report -s ${SRC_PATH} -t ${TARGET_PATHS} -a ${ALIAS_PATHS} -c ${CHILD_ANALYZE_LEVEL} -p ${PARENT_ANALYZE_LEVEL} --identifier ${IDENTIFIER}`
+          `js_dependency export_markdown_report -s ${SRC_PATH} -t ${TARGET_PATHS} -a ${ALIAS_PATHS} -c ${CHILD_ANALYZE_LEVEL} -p ${PARENT_ANALYZE_LEVEL} --identifier ${IDENTIFIER} --exclude-output-names ${EXCLUDE_OUTPUT_NAMES}`
           
           ### Analyzed commit
           ${{ github.sha }}
