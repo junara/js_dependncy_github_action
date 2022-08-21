@@ -1,9 +1,0 @@
-```mermaid
-flowchart LR
-components_Button["components/Button"] --> components_sub_Title.vue["sub/Title.vue"]
-components_Button["components/Button"] --> fixtures_index_creator_self_call_src_components_sub_Exclude["sub/Exclude"]
-components_New.vue["components/New.vue"] --> components_Button["components/Button"]
-components_New.vue["components/New.vue"] --> components_modal.js["components/modal.js"]
-pages_app.js["pages/app.js"] --> components_New.vue["components/New.vue"]
-style pages_app.js stroke:#f9f,stroke-width:4px
-```

@@ -32,23 +32,7 @@ jobs:
           echo "::set-output name=body::$body"
       - name: Edit PR comment
         uses: thollander/actions-comment-pull-request@v1
-        env:
-          URL: ${{ github.event.pull_request.html_url }}
         with:
           message: ${{ steps.get-comment-body.outputs.body }}
           comment_includes: "<!-- js_dependency_pull_request_comments_${{ github.ref }} -->"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - id: mermaid-body
-        run: |
-          body="$(cat mermaidtext)"
-          body="${body//'%'/'%25'}"
-          body="${body//$'\n'/'%0A'}"
-          body="${body//$'\r'/'%0D'}"
-          echo "::set-output name=body::$body"
-      - name: Text edit PR comment
-        uses: thollander/actions-comment-pull-request@v1
-        env:
-          URL: ${{ github.event.pull_request.html_url }}
-        with:
-          message: ${{ steps.mermaid-body.outputs.body }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
