@@ -20,7 +20,6 @@ jobs:
       - name: Create report
         env:
           SRC_PATH: src
-#          TARGET_PATHS: "${{ env.GIT_DIFF }}"
           CHILD_ANALYZE_LEVEL: 2
           PARENT_ANALYZE_LEVEL: 2
           NAME_LEVEL: 2
@@ -34,7 +33,7 @@ jobs:
           ### Analyzed commit
           ${{ github.sha }}
           EOF
-      #        if: env.GIT_DIFF
+        if: env.GIT_DIFF
       - id: get-comment-body
         run: |
           body="$(cat ${{ github.sha }}_comment)"
@@ -42,12 +41,12 @@ jobs:
           body="${body//$'\n'/'%0A'}"
           body="${body//$'\r'/'%0D'}"
           echo "::set-output name=body::$body"
-      #        if: env.GIT_DIFF
+        if: env.GIT_DIFF
       - name: Upsert JsDependency PR comment
         uses: thollander/actions-comment-pull-request@v1
         with:
           message: ${{ steps.get-comment-body.outputs.body }}
           comment_includes: "<!-- js_dependency_pull_request_comments_${{ github.ref }} -->"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        if: env.GIT_DIFF
+        if: env.GIT_DIFF
 
